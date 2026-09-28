@@ -1,0 +1,16 @@
+{
+  "book": {
+    "slug": "japanese",
+    "number": "02",
+    "category": "Languages",
+    "title": "Japanese",
+    "description": "A gentle path through vocabulary and everyday grammar."
+  },
+  "volume": {
+    "slug": "volume-1",
+    "number": 1,
+    "title": "First Words",
+    "emptyMessage": "This volume is being prepared. Check back soon to begin reading.",
+    "chapters": []
+  }
+}

@@ -1,50 +1,90 @@
 import { useEffect } from 'react'
-import '../shared/pocket-book.css'
-import { renderIcons } from '../shared/icons.js'
+import { books, findVolume } from './books.js'
+import { BookList } from './components/BookList.jsx'
+import { SiteHeader } from './components/SiteHeader.jsx'
+import { BookOverview } from './components/BookOverview.jsx'
+import { BookReader } from './components/BookReader.jsx'
 
-function App() {
-  useEffect(() => {
-    renderIcons()
-  }, [])
+function getRoute(pathname) {
+  const pathSegments = pathname.split('/').filter(Boolean)
+  const bookRouteIndex = pathSegments.lastIndexOf('book')
+  const readerRouteIndex = pathSegments.lastIndexOf('reader')
 
+  if (bookRouteIndex >= 0 && pathSegments[bookRouteIndex + 1]) {
+    return { type: 'book', slug: pathSegments[bookRouteIndex + 1] }
+  }
+
+  if (
+    readerRouteIndex >= 0 &&
+    pathSegments[readerRouteIndex + 1] &&
+    pathSegments[readerRouteIndex + 2]
+  ) {
+    return {
+      type: 'reader',
+      bookSlug: pathSegments[readerRouteIndex + 1],
+      volumeSlug: pathSegments[readerRouteIndex + 2],
+    }
+  }
+
+  return { type: 'home' }
+}
+
+function LibraryHome() {
   return (
     <main className="book-index">
-      <header className="site-header">
-        <a className="wordmark" href="./">Pocket Books</a>
-        <span className="header-note">Your personal library</span>
-      </header>
+      <SiteHeader homeHref="./" />
       <section className="library" aria-labelledby="library-title">
         <p className="eyebrow">A little reading, at your own pace</p>
         <h1 id="library-title">Your next read</h1>
         <p className="intro">Books to follow your curiosity, one volume at a time.</p>
         <p className="section-label">Your books</p>
-        <ul className="book-list">
-          <li>
-            <a href="./software-engineering/">
-              <span className="book-number" aria-hidden="true">01</span>
-              <span className="book-details">
-                <span className="book-category">Technology</span>
-                <span className="book-title">Software Engineering</span>
-              </span>
-              <span className="book-volume">
-                Open book <i className="action-icon" data-lucide="arrow-right" aria-hidden="true"></i>
-              </span>
-            </a>
-          </li>
-          <li>
-            <a href="./japanese/">
-              <span className="book-number" aria-hidden="true">02</span>
-              <span className="book-details">
-                <span className="book-category">Languages</span>
-                <span className="book-title">Japanese</span>
-              </span>
-              <span className="book-volume">
-                Open book <i className="action-icon" data-lucide="arrow-right" aria-hidden="true"></i>
-              </span>
-            </a>
-          </li>
-        </ul>
+        <BookList books={books} />
       </section>
+    </main>
+  )
+}
+
+function App() {
+  const route = getRoute(window.location.pathname)
+  const book =
+    route.type === 'book' ? books.find((item) => item.slug === route.slug) : null
+  const volumeData =
+    route.type === 'reader'
+      ? findVolume(route.bookSlug, route.volumeSlug)
+      : null
+  const pageTitle = book
+    ? `${book.title} | Pocket Books`
+    : volumeData
+      ? `${volumeData.book.title} | Volume ${volumeData.volume.number} | Pocket Books`
+      : 'Pocket Books'
+
+  useEffect(() => {
+    document.title = pageTitle
+  }, [pageTitle])
+
+  if (route.type === 'book') {
+    return book ? (
+      <BookOverview book={book} />
+    ) : (
+      <NotFound message="This book could not be found." />
+    )
+  }
+
+  if (route.type === 'reader') {
+    return volumeData ? (
+      <BookReader book={volumeData.book} volume={volumeData.volume} />
+    ) : (
+      <NotFound message="This volume could not be found." />
+    )
+  }
+
+  return <LibraryHome />
+}
+
+function NotFound({ message }) {
+  return (
+    <main className="volume-page reader-page">
+      <p role="alert">{message}</p>
     </main>
   )
 }

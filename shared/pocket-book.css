@@ -15,6 +15,11 @@
   --accent: #b24c36;
   --teal: #28766d;
   --gold: #c38a26;
+  --wordmark-font-size: 21px;
+  --wordmark-line-height: 1.2;
+  --wordmark-gap: 10px;
+  --wordmark-icon-width: 17px;
+  --wordmark-icon-height: 22px;
 }
 
 * {
@@ -44,7 +49,7 @@ a {
 
 .wordmark {
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 20px;
+  font-size: var(--wordmark-font-size);
   font-weight: 700;
   text-decoration: none;
 }
@@ -115,7 +120,7 @@ h1 {
 }
 
 .volume-page {
-  padding: 24px 0 80px;
+  padding: 0 0 80px;
 }
 
 .back-link {
@@ -196,22 +201,19 @@ h1 {
 .wordmark {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font-size: 21px;
+  gap: var(--wordmark-gap);
+  font-size: var(--wordmark-font-size);
+  line-height: var(--wordmark-line-height);
 }
 
 .wordmark::before {
-  width: 17px;
-  height: 22px;
+  box-sizing: border-box;
+  width: var(--wordmark-icon-width);
+  height: var(--wordmark-icon-height);
   border: 1px solid var(--accent);
   border-left-width: 4px;
   content: "";
   transform: rotate(-5deg);
-}
-
-.header-note {
-  color: var(--muted);
-  font-size: 12px;
 }
 
 .library {
@@ -331,7 +333,6 @@ h1 {
 }
 
 .reader-page {
-  width: min(100% - 48px, 760px);
   color: #292929;
 }
 
@@ -381,10 +382,6 @@ h1 {
     min-height: 68px;
   }
 
-  .header-note {
-    font-size: 11px;
-  }
-
   .library {
     padding: 64px 0 78px;
   }
@@ -426,10 +423,6 @@ h1 {
   .reader-page .reader-content {
     padding-top: 26px;
     font-size: 18px;
-  }
-
-  .reader-page {
-    width: min(100% - 32px, 620px);
   }
 
   .reader-page .volume-content {

@@ -212,7 +212,6 @@
 
 /* 4. Mobile/screen styles */
 .reader-page {
-  width: min(100% - 40px, 900px);
   margin-inline: auto;
 }
 
@@ -221,10 +220,6 @@
 }
 
 @media (max-width: 600px) {
-  .reader-page {
-    width: min(100% - 32px, 900px);
-  }
-
   .reader-page .chapter {
     width: 100%;
     padding: var(--space-4) 20px var(--space-8);
@@ -295,7 +290,6 @@
   }
 
   .site-header,
-  .header-note,
   .header-back,
   .back-link {
     display: none !important;
