@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="An example lesson on focused functions." />
+    <title>Keep Functions Focused | Pocket Books</title>
+    <script type="module" crossorigin src="../../assets/icons-CqctNw8M.js"></script>
+    <link rel="stylesheet" crossorigin href="../../assets/icons-WbaZwjwH.css">
+    <link rel="stylesheet" crossorigin href="../../assets/lesson-system-CQ2tuLHo.css">
+  </head>
+  <body class="reading-body">
+    <main class="volume-page reader-page">
+      <header class="site-header">
+        <a class="wordmark" href="../../">Pocket Books</a>
+        <a class="header-back" href="../" data-history-back aria-label="Back to Software Engineering" title="Back to Software Engineering">
+          <i data-lucide="arrow-left" aria-hidden="true"></i>
+        </a>
+      </header>
+      <article class="chapter volume-content">
+        <header class="chapter-header">
+          <p class="chapter-kicker">Software Engineering · Volume 01</p>
+          <h1 class="chapter-title">Keep Functions Focused</h1>
+        </header>
+        <section class="section" aria-labelledby="focused-functions">
+          <h2 id="focused-functions">One clear responsibility</h2>
+          <p>A focused function does one job and makes that job easy to recognize. It is simpler to name, test, and change without surprising the code that calls it.</p>
+          <p>Keep calculation separate from tasks such as reading files, formatting messages, or saving data. That gives each part a clear reason to change.</p>
+          <aside class="concept">
+            <h3 class="callout-title">Concept</h3>
+            <p>A function is easier to understand when its name, inputs, and result all describe the same small task.</p>
+          </aside>
+        </section>
+        <section class="example" aria-labelledby="subtotal-example">
+          <h2 id="subtotal-example">Example</h2>
+          <p>This function calculates a subtotal from a sequence of line totals:</p>
+          <pre class="code-block"><code class="language-csharp">public static decimal CalculateSubtotal(
+    IEnumerable&lt;decimal&gt; lineTotals)
+{
+    return lineTotals.Sum();
+}</code></pre>
+        </section>
+        <aside class="remember">
+          <h2 class="callout-title">Remember</h2>
+          <p>One function, one clear responsibility. A useful name should explain what the function returns or changes.</p>
+        </aside>
+        <aside class="important">
+          <h2 class="callout-title">Important</h2>
+          <p>Decide how the function handles empty or invalid input, and make that behavior explicit in its contract.</p>
+        </aside>
+        <section class="exercise" aria-labelledby="focused-exercise">
+          <h2 id="focused-exercise">Short exercise</h2>
+          <p>Write a function that returns the average of a collection of numbers. Give it one responsibility and decide what it should return when the collection is empty.</p>
+        </section>
+      </article>
+    </main>
+  </body>
+</html>
