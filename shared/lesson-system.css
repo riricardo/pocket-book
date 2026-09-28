@@ -1,0 +1,414 @@
+@import "@fontsource/inter/latin-400.css";
+@import "@fontsource/inter/latin-500.css";
+@import "@fontsource/inter/latin-600.css";
+@import "@fontsource/jetbrains-mono/latin-400.css";
+@import "@fontsource/source-serif-4/latin-400.css";
+@import "@fontsource/source-serif-4/latin-600.css";
+
+/* 1. Design tokens */
+:root {
+  --font-sans: "Inter", sans-serif;
+  --font-serif: "Source Serif 4", Georgia, serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --screen-bg: #f8f9fa;
+  --screen-text: #202124;
+  --muted-text: #5f6368;
+  --line: #dadce0;
+  --accent: #346a68;
+  --body-size: 17px;
+  --body-leading: 1.6;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 40px;
+
+  --page-width: 105mm;
+  --page-height: 148mm;
+  --page-margin-inner: 12mm;
+  --page-margin-outer: 10mm;
+}
+
+/* 2. Base typography */
+.reading-body {
+  min-width: 320px;
+  color: var(--screen-text);
+  background: var(--screen-bg);
+  font-family: var(--font-sans);
+  font-size: var(--body-size);
+  line-height: var(--body-leading);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.reading-body *,
+.reading-body *::before,
+.reading-body *::after {
+  box-sizing: border-box;
+}
+
+.chapter {
+  width: min(100%, 45ch);
+  margin: 0 auto;
+  padding: var(--space-5) var(--space-6) var(--space-8);
+  text-align: left;
+}
+
+.chapter h1,
+.chapter h2,
+.chapter h3 {
+  color: var(--screen-text);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.chapter h1 {
+  margin: 0 0 var(--space-4);
+  font-size: 2rem;
+}
+
+.chapter h2 {
+  margin: 0 0 var(--space-3);
+  font-size: 1.375rem;
+}
+
+.chapter h3 {
+  margin: 0 0 var(--space-2);
+  font-size: 1rem;
+}
+
+.chapter p {
+  margin: 0 0 var(--space-4);
+}
+
+/* 3. Content components */
+.chapter-header {
+  margin-bottom: var(--space-7);
+}
+
+.chapter-kicker {
+  margin: 0 0 var(--space-2);
+  color: var(--muted-text);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.chapter-title {
+  max-width: 18ch;
+}
+
+.chapter-intro {
+  color: var(--muted-text);
+  font-size: 1.0625rem;
+}
+
+.section {
+  margin-block: var(--space-7);
+}
+
+.concept,
+.example,
+.remember,
+.important,
+.warning,
+.tip,
+.exercise {
+  margin-block: var(--space-5);
+  padding: var(--space-4) var(--space-5);
+  border: 1px solid transparent;
+  border-radius: 8px;
+}
+
+.concept {
+  border-color: #d7e7e5;
+  background: #eef6f5;
+}
+
+.example {
+  border-color: #e0e3e7;
+  background: #f1f3f5;
+}
+
+.remember {
+  border-color: #cfe4d5;
+  background: #edf7ef;
+}
+
+.important {
+  border-color: #efdfb5;
+  background: #fff7e5;
+}
+
+.warning {
+  border-color: #efd2c8;
+  background: #fff1ec;
+}
+
+.tip {
+  border-color: #d0dfef;
+  background: #eef5fc;
+}
+
+.exercise {
+  border-color: #ddd6ef;
+  background: #f5f2fb;
+}
+
+.concept > :last-child,
+.example > :last-child,
+.remember > :last-child,
+.important > :last-child,
+.warning > :last-child,
+.tip > :last-child,
+.exercise > :last-child {
+  margin-bottom: 0;
+}
+
+.callout-title {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.code-block {
+  max-width: 100%;
+  margin: var(--space-3) 0 0;
+  padding: var(--space-4);
+  overflow-x: auto;
+  border: 1px solid #e0e3e7;
+  border-radius: 6px;
+  background: #e9ecef;
+  color: #202124;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.55;
+  tab-size: 4;
+  white-space: pre;
+  -webkit-overflow-scrolling: touch;
+}
+
+.code-block code,
+.inline-code {
+  font-family: var(--font-mono);
+}
+
+.inline-code {
+  padding: 0.08em 0.3em;
+  border-radius: 4px;
+  background: #eceff1;
+  font-size: 0.88em;
+}
+
+/* 4. Mobile/screen styles */
+.reader-page {
+  width: min(100% - 40px, 900px);
+  margin-inline: auto;
+}
+
+.reader-page .chapter {
+  padding-top: var(--space-6);
+}
+
+@media (max-width: 600px) {
+  .reader-page {
+    width: min(100% - 32px, 900px);
+  }
+
+  .reader-page .chapter {
+    width: 100%;
+    padding: var(--space-4) 20px var(--space-8);
+  }
+
+  .chapter h1 {
+    font-size: 1.75rem;
+  }
+
+  .concept,
+  .example,
+  .remember,
+  .important,
+  .warning,
+  .tip,
+  .exercise {
+    margin-block: var(--space-4);
+    padding: var(--space-4);
+  }
+
+  .code-block {
+    margin-right: -4px;
+    margin-left: -4px;
+    padding: var(--space-3);
+    font-size: 0.6875rem;
+  }
+}
+
+/* 5. Print/Pocket Book styles */
+@page {
+  size: 105mm 148mm;
+  margin: 11mm 10mm 12mm;
+
+  @bottom-center {
+    color: #505050;
+    font-family: "Inter", sans-serif;
+    font-size: 8pt;
+    content: counter(page);
+  }
+}
+
+@page :left {
+  margin-left: 12mm;
+  margin-right: 10mm;
+}
+
+@page :right {
+  margin-left: 10mm;
+  margin-right: 12mm;
+}
+
+@media print {
+  .reading-body {
+    min-width: 0;
+    color: #202124;
+    background: #fff;
+    font-family: var(--font-serif);
+    font-size: 10pt;
+    line-height: 1.4;
+  }
+
+  .reader-page,
+  .reader-page .chapter {
+    width: auto;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .site-header,
+  .header-note,
+  .header-back,
+  .back-link {
+    display: none !important;
+  }
+
+  .chapter-header {
+    margin-bottom: 5mm;
+  }
+
+  .chapter h1,
+  .chapter h2,
+  .chapter h3,
+  .callout-title {
+    color: #202124;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    break-after: avoid-page;
+    page-break-after: avoid;
+  }
+
+  .chapter h1 {
+    margin-bottom: 3mm;
+    font-size: 17pt;
+    line-height: 1.2;
+  }
+
+  .reader-page .chapter h1 {
+    font-size: 17pt;
+  }
+
+  .chapter h2 {
+    margin-bottom: 2mm;
+    font-size: 11pt;
+    line-height: 1.25;
+  }
+
+  .chapter h3,
+  .callout-title {
+    font-size: 10pt;
+  }
+
+  .chapter p {
+    margin-bottom: 3mm;
+    orphans: 3;
+    widows: 3;
+  }
+
+  .chapter-kicker {
+    margin-bottom: 2mm;
+    color: #444;
+    font-size: 8pt;
+  }
+
+  .chapter-intro {
+    font-size: 10pt;
+  }
+
+  .section {
+    margin-block: 5mm;
+    break-inside: auto;
+  }
+
+  .concept,
+  .example,
+  .remember,
+  .important,
+  .warning,
+  .tip,
+  .exercise {
+    margin-block: 3mm;
+    padding: 3mm;
+    border: 0.5pt solid #777;
+    border-radius: 0;
+    color: #202124;
+    background: #fff;
+    break-inside: avoid-page;
+    page-break-inside: avoid;
+    print-color-adjust: economy;
+    -webkit-print-color-adjust: economy;
+  }
+
+  .code-block {
+    max-width: 100%;
+    margin-top: 2mm;
+    padding: 3mm;
+    overflow: visible;
+    border: 0.5pt solid #999;
+    border-radius: 0;
+    color: #111;
+    background: #fff;
+    font-family: var(--font-mono);
+    font-size: 7.5pt;
+    line-height: 1.35;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    break-inside: avoid-page;
+    page-break-inside: avoid;
+  }
+
+  .code-block code {
+    white-space: inherit;
+    overflow-wrap: inherit;
+  }
+
+  .inline-code {
+    padding: 0;
+    color: #111;
+    background: #fff;
+    font-size: 0.9em;
+  }
+
+  a {
+    color: #202124;
+  }
+}
