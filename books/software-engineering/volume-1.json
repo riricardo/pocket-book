@@ -84,6 +84,66 @@
             ]
           }
         ]
+      },
+      {
+        "id": "chapter-two",
+        "title": "A Broader Perspective",
+        "sections": [
+          {
+            "id": "chapter-two-overview",
+            "title": "Looking at the whole",
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae justo sed sapien tempor consequat. Donec euismod, nisl eget consectetur sagittis, nunc urna facilisis lectus, vitae blandit neque erat non erat."
+              },
+              {
+                "type": "paragraph",
+                "text": "Praesent commodo, arcu sed finibus vulputate, neque lorem posuere felis, at feugiat mauris erat at mi. Suspendisse potenti. Curabitur sed dui vel justo pretium consequat in vitae erat."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "chapter-three",
+        "title": "Working Through Details",
+        "sections": [
+          {
+            "id": "chapter-three-overview",
+            "title": "Small parts, clear purpose",
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Morbi malesuada, libero non tincidunt placerat, lectus neque posuere massa, in vulputate nibh justo vitae augue."
+              },
+              {
+                "type": "paragraph",
+                "text": "Aliquam erat volutpat. Integer consequat justo at nunc volutpat, a elementum nibh dictum. Sed vitae magna eu nulla tincidunt varius. Nam eget ligula id sapien feugiat commodo."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "chapter-four",
+        "title": "Moving Forward",
+        "sections": [
+          {
+            "id": "chapter-four-overview",
+            "title": "Putting ideas into practice",
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "Quisque sit amet lorem vel arcu tristique posuere. Fusce sed odio non justo facilisis bibendum. Aenean vitae sem non magna pulvinar tristique a at lectus."
+              },
+              {
+                "type": "paragraph",
+                "text": "Mauris ullamcorper, sapien a consequat facilisis, tortor neque luctus lacus, vitae maximus sapien est vitae justo. Proin euismod nunc non magna tincidunt, vel volutpat dui interdum."
+              }
+            ]
+          }
+        ]
       }
     ]
   }

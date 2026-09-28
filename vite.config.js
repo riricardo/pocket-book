@@ -28,9 +28,27 @@ function bookRoutes() {
 
         const requestUrl = new URL(request.url, 'http://localhost')
         const bookRoute = /^\/book\/([^/]+)\/?$/.test(requestUrl.pathname)
-        const readerRoute = /^\/reader\/([^/]+)\/([^/]+)\/?$/.test(requestUrl.pathname)
+        const pathSegments = requestUrl.pathname.split('/').filter(Boolean)
+        const volumes = loadVolumes()
+        const bookSlug = pathSegments.at(-3)
+        const volumeSlug = pathSegments.at(-2)
+        const chapterSlug = pathSegments.at(-1)
+        const chapterRoute = volumes.some(
+          ({ book, volume }) =>
+            book.slug === bookSlug &&
+            volume.slug === volumeSlug &&
+            volume.chapters.some((chapter) => chapter.id === chapterSlug),
+        )
+        const emptyVolumeRoute = volumes.some(
+          ({ book, volume }) =>
+            book.slug === pathSegments.at(-2) &&
+            volume.slug === pathSegments.at(-1) &&
+            volume.chapters.length === 0,
+        )
 
-        if (bookRoute || readerRoute) request.url = `/index.html${requestUrl.search}`
+        if (bookRoute || chapterRoute || emptyVolumeRoute) {
+          request.url = `/index.html${requestUrl.search}`
+        }
 
         next()
       })
@@ -61,11 +79,21 @@ function bookRoutes() {
           emittedBooks.add(book.slug)
         }
 
-        this.emitFile({
-          type: 'asset',
-          fileName: `reader/${book.slug}/${volume.slug}/index.html`,
-          source: rebaseAssets(pageHtml, 3),
-        })
+        if (volume.chapters.length > 0) {
+          for (const chapter of volume.chapters) {
+            this.emitFile({
+              type: 'asset',
+              fileName: `${book.slug}/${volume.slug}/${chapter.id}/index.html`,
+              source: rebaseAssets(pageHtml, 3),
+            })
+          }
+        } else {
+          this.emitFile({
+            type: 'asset',
+            fileName: `${book.slug}/${volume.slug}/index.html`,
+            source: rebaseAssets(pageHtml, 2),
+          })
+        }
       }
     },
   }

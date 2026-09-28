@@ -55,10 +55,11 @@
 }
 
 .chapter {
-  width: min(100%, 45ch);
-  margin: 0 auto;
-  padding: var(--space-5) var(--space-6) var(--space-8);
+  width: min(100%, 68ch);
+  margin: 0;
+  padding: var(--space-5) 0 var(--space-8);
   text-align: left;
+  scroll-margin-top: var(--space-6);
 }
 
 .chapter h1,
@@ -92,6 +93,43 @@
 /* 3. Content components */
 .chapter-header {
   margin-bottom: var(--space-7);
+}
+
+.chapter-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: var(--space-7);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--line);
+}
+
+.chapter-navigation-link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: 6px;
+  color: var(--accent);
+  font-size: 0.875rem;
+  text-decoration: none;
+}
+
+.chapter-navigation-link:hover,
+.chapter-navigation-link:focus-visible {
+  background: #eef2f1;
+}
+
+.chapter-navigation-link svg {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+}
+
+.chapter-navigation-next {
+  margin-left: auto;
 }
 
 .chapter-kicker {
@@ -215,18 +253,30 @@
   margin-inline: auto;
 }
 
+.reader-page .volume-content {
+  max-width: none;
+}
+
 .reader-page .chapter {
+  width: 100%;
+  max-width: none;
   padding-top: var(--space-6);
 }
 
 @media (max-width: 600px) {
   .reader-page .chapter {
     width: 100%;
-    padding: var(--space-4) 20px var(--space-8);
+    padding: var(--space-4) 0 var(--space-8);
   }
 
   .chapter h1 {
     font-size: 1.75rem;
+  }
+
+  .chapter-navigation-link {
+    gap: var(--space-1);
+    padding-inline: var(--space-1);
+    font-size: 0.75rem;
   }
 
   .concept,
@@ -285,13 +335,20 @@
   .reader-page .chapter {
     width: auto;
     max-width: none;
+    .reader-page .volume-content {
+      max-width: none;
+    }
+
     margin: 0;
+    padding-top: var(--space-6);
+    width: 100%;
     padding: 0;
   }
 
   .site-header,
   .header-back,
-  .back-link {
+  .back-link,
+  .chapter-navigation {
     display: none !important;
   }
 

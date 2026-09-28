@@ -8,21 +8,27 @@ import { BookReader } from './components/BookReader.jsx'
 function getRoute(pathname) {
   const pathSegments = pathname.split('/').filter(Boolean)
   const bookRouteIndex = pathSegments.lastIndexOf('book')
-  const readerRouteIndex = pathSegments.lastIndexOf('reader')
 
   if (bookRouteIndex >= 0 && pathSegments[bookRouteIndex + 1]) {
     return { type: 'book', slug: pathSegments[bookRouteIndex + 1] }
   }
 
-  if (
-    readerRouteIndex >= 0 &&
-    pathSegments[readerRouteIndex + 1] &&
-    pathSegments[readerRouteIndex + 2]
-  ) {
+  const bookSlug = pathSegments.at(-3)
+  const volumeSlug = pathSegments.at(-2)
+  const chapterSlug = pathSegments.at(-1)
+  const chapterVolume = findVolume(bookSlug, volumeSlug)
+  const chapter = chapterVolume?.volume.chapters.find((item) => item.id === chapterSlug)
+
+  if (chapterVolume && chapter) {
+    return { type: 'chapter', bookSlug, volumeSlug, chapterSlug }
+  }
+
+  const emptyVolume = findVolume(pathSegments.at(-2), pathSegments.at(-1))
+  if (emptyVolume && emptyVolume.volume.chapters.length === 0) {
     return {
-      type: 'reader',
-      bookSlug: pathSegments[readerRouteIndex + 1],
-      volumeSlug: pathSegments[readerRouteIndex + 2],
+      type: 'volume',
+      bookSlug: pathSegments.at(-2),
+      volumeSlug: pathSegments.at(-1),
     }
   }
 
@@ -49,12 +55,18 @@ function App() {
   const book =
     route.type === 'book' ? books.find((item) => item.slug === route.slug) : null
   const volumeData =
-    route.type === 'reader'
+    route.type === 'chapter' || route.type === 'volume'
       ? findVolume(route.bookSlug, route.volumeSlug)
+      : null
+  const chapter =
+    route.type === 'chapter'
+      ? volumeData?.volume.chapters.find((item) => item.id === route.chapterSlug)
       : null
   const pageTitle = book
     ? `${book.title} | Pocket Books`
-    : volumeData
+    : chapter
+      ? `${chapter.title} | ${volumeData.book.title} | Pocket Books`
+      : volumeData
       ? `${volumeData.book.title} | Volume ${volumeData.volume.number} | Pocket Books`
       : 'Pocket Books'
 
@@ -70,9 +82,13 @@ function App() {
     )
   }
 
-  if (route.type === 'reader') {
+  if (route.type === 'chapter' || route.type === 'volume') {
     return volumeData ? (
-      <BookReader book={volumeData.book} volume={volumeData.volume} />
+      <BookReader
+        book={volumeData.book}
+        volume={volumeData.volume}
+        chapter={chapter}
+      />
     ) : (
       <NotFound message="This volume could not be found." />
     )
